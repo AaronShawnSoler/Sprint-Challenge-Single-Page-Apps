@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function LocationsList({data}) {
+export default function Episode({data}) {
 
-    const [locationData, setLocationData] = useState();
+    const [episodeData, setEpisodeData] = useState();
 
     useEffect(() => {
-        axios.get(data.url)
+        axios.get(data[0])
         .then(res => {
             console.log(res);
-            setLocationData(res.data.dimension);
+            setEpisodeData(res.data.episode);
         })
         .catch(err => {
             console.log(err);
@@ -18,7 +18,7 @@ export default function LocationsList({data}) {
 
     return(
         <div>
-            <p>Location: {locationData}</p>
+            <p>Episode Introduced: {episodeData}</p>
         </div>
     );
 }
