@@ -3,6 +3,11 @@ import CharacterCard from './CharacterCard';
 import SearchForm from './SearchForm';
 
 import axios from "axios";
+import styled from 'styled-components';
+
+const PaddedDiv = styled.div`
+  padding: 24px 0;
+`;
 
 export default function CharacterList() {
   // TODO: Add useState to track data from useEffect
@@ -26,7 +31,7 @@ export default function CharacterList() {
 
   return (
     <section className="character-list">
-      <SearchForm filter={setFilterCharacters} data={characterData}/>
+      <PaddedDiv><SearchForm filter={setFilterCharacters} data={characterData}/></PaddedDiv>
       {filterCharacters.map((element, index) => <CharacterCard data={element} key={index}/>)}
     </section>
   );
