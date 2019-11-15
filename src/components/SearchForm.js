@@ -1,10 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function SearchForm() {
+import { Formik, Form, Field } from 'formik';
+
+export default function SearchForm({filter, data}) {
  
   return (
     <section className="search-form">
-     // Add a search form here
+     <Formik
+     initialValues={{
+       search: ''
+     }}
+     onSubmit={(values, tools) => {
+       console.log(values, tools);
+       filter(data.filter(character => character.name.toLowerCase().includes(values.search)));
+       if(values.search === '') {
+         filter(data);
+       }
+       tools.resetForm();
+     }}
+     >
+       {({isSubmitting}) => 
+        <Form>
+          <Field type='text' name='search' placeholder='search by character name'/>
+          <button type='submit' disabled={isSubmitting}>
+            {isSubmitting ? 'Submitting...' : 'Submit'}
+          </button>
+        </Form>
+       }
+     </Formik>
     </section>
   );
 }
